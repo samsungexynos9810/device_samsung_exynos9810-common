@@ -523,6 +523,65 @@ int mali_gralloc_ion_open(void)
 	return open_and_query_ion();
 }
 
+static int mali_gralloc_ion_sync(const private_handle_t * const hnd,
+                                       const bool read,
+                                       const bool write,
+                                       const bool start)
+{
+	int ret = 0;
+
+	if (hnd == NULL)
+	{
+		return -EINVAL;
+	}
+
+#ifdef GRALLOC_ION_SYNC
+	if (ion_client <= 0)
+	{
+		/* a second user process must obtain a client handle first via ion_open before it can obtain the shared ion buffer*/
+		AWAR("ion_client not specified");
+
+		if (int status = open_and_query_ion(); status < 0)
+		{
+			return status;
+		}
+	}
+
+	if (hnd->flags & private_handle_t::PRIV_FLAGS_USES_ION &&
+		!(hnd->flags & private_handle_t::PRIV_FLAGS_USES_ION_DMA_HEAP))
+	{
+		int direction = 0;
+
+		if (read)
+		{
+			direction |= ION_SYNC_READ;
+		}
+		if (write)
+		{
+			direction |= ION_SYNC_WRITE;
+		}
+
+		for (int idx = 0; idx < hnd->get_num_ion_fds(); idx++)
+		{
+			if (start)
+			{
+				ret |= exynos_ion_sync_start(ion_client, hnd->fds[idx], direction);
+			}
+			else
+			{
+				ret |= exynos_ion_sync_end(ion_client, hnd->fds[idx], direction);
+			}
+		}
+	}
+#else
+	GRALLOC_UNUSED(read);
+	GRALLOC_UNUSED(write);
+	GRALLOC_UNUSED(start);
+#endif
+
+	return ret;
+}
+
 /*
  * Signal start of CPU access to the DMABUF exported from ION.
  *
@@ -537,37 +596,7 @@ int mali_gralloc_ion_sync_start(const private_handle_t * const hnd,
                                 const bool read,
                                 const bool write)
 {
-	if (hnd == NULL)
-	{
-		return -EINVAL;
-	}
-
-	if (ion_client <= 0)
-	{
-		/* a second user process must obtain a client handle first via ion_open before it can obtain the shared ion buffer*/
-		AWAR("ion_client not specified");
-
-		int status = 0;
-		status = open_and_query_ion();
-		if (status < 0)
-		{
-			return status;
-		}
-	}
-
-	GRALLOC_UNUSED(read);
-	GRALLOC_UNUSED(write);
-
-	if (hnd->flags & private_handle_t::PRIV_FLAGS_USES_ION &&
-		!(hnd->flags & private_handle_t::PRIV_FLAGS_USES_ION_DMA_HEAP))
-	{
-		for (int idx = 0; idx < hnd->get_num_ion_fds(); idx++)
-		{
-			exynos_ion_sync_fd(ion_client, hnd->fds[idx]);
-		}
-	}
-
-	return 0;
+	return mali_gralloc_ion_sync(hnd, read, write, true);
 }
 
 
@@ -585,38 +614,7 @@ int mali_gralloc_ion_sync_end(const private_handle_t * const hnd,
                               const bool read,
                               const bool write)
 {
-	if (hnd == NULL)
-	{
-		return -EINVAL;
-	}
-
-	if (ion_client <= 0)
-	{
-		/* a second user process must obtain a client handle first via ion_open before it can obtain the shared ion buffer*/
-		AWAR("ion_client not specified");
-
-		int status = 0;
-		status = open_and_query_ion();
-		if (status < 0)
-		{
-			return status;
-		}
-	}
-
-
-	GRALLOC_UNUSED(read);
-	GRALLOC_UNUSED(write);
-
-	if (hnd->flags & private_handle_t::PRIV_FLAGS_USES_ION &&
-		!(hnd->flags & private_handle_t::PRIV_FLAGS_USES_ION_DMA_HEAP))
-	{
-		for (int idx = 0; idx < hnd->get_num_ion_fds(); idx++)
-		{
-			exynos_ion_sync_fd(ion_client, hnd->fds[idx]);
-		}
-	}
-
-	return 0;
+	return mali_gralloc_ion_sync(hnd, read, write, false);
 }
 
 

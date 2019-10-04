@@ -74,6 +74,13 @@ static enum tx_direction get_tx_direction(const uint64_t usage)
 static void buffer_sync(private_handle_t * const hnd,
                         const enum tx_direction direction)
 {
+	const uint64_t usage = hnd->producer_usage | hnd->consumer_usage;
+
+	if ((usage & (GRALLOC_USAGE_SW_READ_MASK | GRALLOC_USAGE_SW_WRITE_MASK)) == 0)
+	{
+		return;
+	}
+
 	if (hnd->flags & private_handle_t::PRIV_FLAGS_USES_ION)
 	{
 		if (direction != TX_NONE)
