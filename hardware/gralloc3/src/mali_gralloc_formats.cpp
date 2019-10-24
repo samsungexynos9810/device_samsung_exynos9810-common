@@ -1558,7 +1558,7 @@ uint32_t get_base_format(const uint64_t req_format,
 	}
 	else if (req_format == HAL_PIXEL_FORMAT_YCbCr_420_888)
 	{
-		if (usage & GRALLOC1_CONSUMER_USAGE_VIDEO_ENCODER)
+		if (usage & (GRALLOC1_CONSUMER_USAGE_VIDEO_ENCODER | GRALLOC1_PRODUCER_USAGE_GPU_RENDER_TARGET))
 		{
 			base_format = HAL_PIXEL_FORMAT_EXYNOS_YCbCr_420_SP_M;
 		}
