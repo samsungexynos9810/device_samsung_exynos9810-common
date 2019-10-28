@@ -137,7 +137,8 @@ int gralloc_buffer_attr_free(private_handle_t *hnd)
 
 	if (hnd->attr_base != MAP_FAILED)
 	{
-		ALOGW("Warning shared attribute region mapped at free. Unmapping");
+		AWAR("Warning shared attribute region mapped at free. Unmapping on pid(%d) tid(%d)", getpid(), gettid());
+		hnd->dump(__FUNCTION__);
 		munmap(hnd->attr_base, PAGE_SIZE);
 		hnd->attr_base = MAP_FAILED;
 	}
