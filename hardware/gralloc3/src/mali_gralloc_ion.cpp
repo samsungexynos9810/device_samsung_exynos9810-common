@@ -1085,6 +1085,22 @@ int import_exynos_ion_handles(private_handle_t *hnd)
 {
 	int retval = -1;
 
+#if GRALLOC_VERSION_MAJOR <= 1
+	/* the test condition is set to ion_client <= 0 here, because
+	 * a second user process should get a ion fd greater than 0.
+	 */
+	if (ion_client <= 0)
+	{
+		/* a second user process must obtain a client handle first via ion_open before it can obtain the shared ion buffer*/
+		int status = 0;
+		status = open_and_query_ion();
+		if (status < 0)
+		{
+			return status;
+		}
+	}
+#endif
+
 	for (int idx = 0; idx < hnd->get_num_ion_fds(); idx++)
 	{
 		if (hnd->fds[idx] >= 0)
@@ -1119,9 +1135,11 @@ void free_exynos_ion_handles(private_handle_t *hnd)
 	{
 		if (hnd->ion_handles[idx])
 		{
-			if (exynos_ion_free_handle(ion_client, hnd->ion_handles[idx]))
+			if (ion_client > 0 && hnd->ion_handles[idx] > 0 &&
+			    exynos_ion_free_handle(ion_client, hnd->ion_handles[idx]))
 			{
-				AERR("error freeing ion_handle[%d] format(%x)\n", idx, (uint32_t)hnd->internal_format);
+				AERR("error freeing ion_client(%d), ion_handle[%d](%d) format(%x)\n",
+				     ion_client, idx, hnd->ion_handles[idx], (uint32_t)hnd->internal_format);
 			}
 		}
 	}
