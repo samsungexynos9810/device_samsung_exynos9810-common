@@ -38,4 +38,8 @@ void free_exynos_ion_handles(private_handle_t *hnd);
 
 int mali_gralloc_ion_open(void);
 
+#if GRALLOC_USE_ASHMEM_METADATA != 1
+int alloc_metadata(void);
+#endif
+
 #endif /* MALI_GRALLOC_ION_H_ */

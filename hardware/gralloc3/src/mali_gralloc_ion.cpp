@@ -388,6 +388,14 @@ static int alloc_from_ion_heap(uint64_t usage, size_t size,
 	return shared_fd;
 }
 
+#if GRALLOC_USE_ASHMEM_METADATA != 1
+int alloc_metadata()
+{
+	int min_pgsz = 0;
+	return alloc_from_ion_heap(GRALLOC1_USAGE_READ_OFTEN | GRALLOC1_USAGE_WRITE_OFTEN, PAGE_SIZE, ION_HEAP_TYPE_SYSTEM, ION_FLAG_CACHED, &min_pgsz);
+}
+#endif
+
 static enum ion_heap_type pick_ion_heap(uint64_t usage)
 {
 	enum ion_heap_type heap_type = ION_HEAP_TYPE_INVALID;
