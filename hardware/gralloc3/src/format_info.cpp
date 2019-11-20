@@ -465,11 +465,6 @@ bool sanitize_formats(void)
 				AERR("Format [id:0x%" PRIx32 "] should not have bpp_afbc defined for plane: %d", format->id, pln);
 				fail = true;
 			}
-			else if (!format->afbc && (format->bpp_afbc[pln] != 0))
-			{
-				AERR("Format [id:0x%" PRIx32 "] which doesn't support afbc should not have bpp defined", format->id);
-				fail = true;
-			}
 		}
 
 		if (format->is_yuv)
