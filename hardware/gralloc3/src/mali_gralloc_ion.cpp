@@ -113,7 +113,7 @@ static void set_ion_flags(enum ion_heap_type heap_type, uint64_t usage,
 			}
 		}
 
-		if (usage & GRALLOC1_PRODUCER_USAGE_GPU_RENDER_TARGET)
+		if (usage & GRALLOC1_PRODUCER_USAGE_GPU_RENDER_TARGET || usage & GRALLOC_USAGE_HW_TEXTURE)
 		{
 			*ion_flags |= ION_FLAG_MAY_HWRENDER;
 		}
