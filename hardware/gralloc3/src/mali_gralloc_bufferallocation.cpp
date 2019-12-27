@@ -994,6 +994,7 @@ static int prepare_descriptor_exynos_formats(buffer_descriptor_t *bufDescriptor)
 				stride = w;
 				byte_stride = stride;
 				luma_size = PLANE_SIZE(stride , h * 3 / 2, ext_size);
+				luma_vstride = h;
 				fd_count = 1;
 				break;
 			}
@@ -1123,7 +1124,7 @@ static int prepare_descriptor_exynos_formats(buffer_descriptor_t *bufDescriptor)
 
 	for (int i = 0; i < fd_count; i++)
 	{
-		size_t alloc_height = i == 0 ? luma_vstride : luma_vstride / 2;
+		size_t alloc_height = i == 0 ? luma_vstride : (luma_vstride / 2);
 		size_t size = i == 0 ? luma_size : chroma_size;
 
 #ifdef GRALLOC_MSCL_ALLOC_RESTRICTION

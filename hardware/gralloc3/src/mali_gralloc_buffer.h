@@ -414,6 +414,7 @@ struct private_handle_t
 				"req_format(0x%x) "
 				"usage_pc(0x%" PRIx64 " 0x%" PRIx64 ") "
 				"interal_format(0x%" PRIx64 ") "
+				"width height (%d %d) "
 				"stride(%d) byte_stride(%d) internal_wh(%d %d) "
 				"alloc_format(0x%" PRIx64 ") "
 				"size(%d %d %d) "
@@ -427,6 +428,7 @@ struct private_handle_t
 				req_format,
 				producer_usage, consumer_usage,
 				internal_format,
+				width, height,
 				stride, plane_info[0].byte_stride, plane_info[0].alloc_width, plane_info[0].alloc_height,
 				alloc_format,
 				sizes[0], sizes[1], sizes[2],
