@@ -307,8 +307,11 @@ static void get_pixel_w_h(uint32_t * const width,
 	 * - Samples for all channels (sub-sampled formats)
 	 * - Memory bytes/words (some packed formats)
 	 */
-	*width = GRALLOC_ALIGN(*width, format.align_w);
-	*height = GRALLOC_ALIGN(*height, format.align_h);
+	if (plane == 0 || !format.planes_contiguous)
+	{
+		*width = GRALLOC_ALIGN(*width, format.align_w);
+		*height = GRALLOC_ALIGN(*height, format.align_h);
+	}
 
 	/*
 	 * Sub-sample (sub-sampled) planes.
@@ -324,7 +327,7 @@ static void get_pixel_w_h(uint32_t * const width,
 	 * where format stride is stated in pixels.
 	 */
 	int pixel_align_w = 0;
-	if (has_cpu_usage)
+	if (has_cpu_usage && (plane == 0 || !format.planes_contiguous))
 	{
 		pixel_align_w = format.align_w_cpu;
 	}
@@ -507,7 +510,8 @@ static void calc_allocation_size(const int width,
 
 			uint32_t cpu_align = 0;
 			assert((format.bpp[plane] * format.align_w_cpu) % 8 == 0);
-			cpu_align = (format.bpp[plane] * format.align_w_cpu) / 8;
+			if (plane == 0 || !format.planes_contiguous)
+				cpu_align = (format.bpp[plane] * format.align_w_cpu) / 8;
 
 			uint32_t stride_align = lcm(hw_align, cpu_align);
 			if (stride_align)
