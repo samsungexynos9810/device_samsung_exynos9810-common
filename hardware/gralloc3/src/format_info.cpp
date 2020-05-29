@@ -163,7 +163,7 @@ const format_ip_support_t formats_ip_support[] = {
 	{ .id = MALI_GRALLOC_FORMAT_INTERNAL_RAW16,                  .cpu_wr = F_LIN,  .cpu_rd = F_LIN,   .gpu_wr = F_NONE,         .gpu_rd = F_NONE,         .dpu_wr = F_NONE, .dpu_rd = F_NONE,              .dpu_aeu_wr = F_NONE, .vpu_wr = F_NONE, .vpu_rd = F_NONE},
 	{ .id = MALI_GRALLOC_FORMAT_INTERNAL_RAW12,                  .cpu_wr = F_LIN,  .cpu_rd = F_LIN,   .gpu_wr = F_NONE,         .gpu_rd = F_NONE,         .dpu_wr = F_NONE, .dpu_rd = F_NONE,              .dpu_aeu_wr = F_NONE, .vpu_wr = F_NONE, .vpu_rd = F_NONE},
 	{ .id = MALI_GRALLOC_FORMAT_INTERNAL_RAW10,                  .cpu_wr = F_LIN,  .cpu_rd = F_LIN,   .gpu_wr = F_NONE,         .gpu_rd = F_NONE,         .dpu_wr = F_NONE, .dpu_rd = F_NONE,              .dpu_aeu_wr = F_NONE, .vpu_wr = F_NONE, .vpu_rd = F_NONE},
-	{ .id = MALI_GRALLOC_FORMAT_INTERNAL_BLOB,                   .cpu_wr = F_LIN,  .cpu_rd = F_LIN,   .gpu_wr = F_LIN,          .gpu_rd = F_LIN,          .dpu_wr = F_NONE, .dpu_rd = F_NONE,              .dpu_aeu_wr = F_NONE, .vpu_wr = F_NONE, .vpu_rd = F_NONE},
+	{ .id = MALI_GRALLOC_FORMAT_INTERNAL_BLOB,                   .cpu_wr = F_LIN,  .cpu_rd = F_LIN,   .gpu_wr = F_LIN,          .gpu_rd = F_LIN,          .dpu_wr = F_NONE, .dpu_rd = F_NONE,              .dpu_aeu_wr = F_NONE, .vpu_wr = F_NONE, .vpu_rd = F_LIN},
 
 	/* Depth and Stencil */
 	{ .id = MALI_GRALLOC_FORMAT_INTERNAL_DEPTH_16,               .cpu_wr = F_LIN,  .cpu_rd = F_LIN,   .gpu_wr = F_NONE,         .gpu_rd = F_NONE,         .dpu_wr = F_NONE, .dpu_rd = F_NONE,              .dpu_aeu_wr = F_NONE, .vpu_wr = F_NONE, .vpu_rd = F_NONE},
