@@ -215,6 +215,7 @@ static void get_ip_capabilities(void)
 	/* Determine VPU IP capabilities */
 	vpu_runtime_caps.caps_mask |= MALI_GRALLOC_FORMAT_CAPABILITY_OPTIONS_PRESENT;
 	vpu_runtime_caps.caps_mask |= MALI_GRALLOC_FORMAT_CAPABILITY_AFBC_BASIC;
+	vpu_runtime_caps.caps_mask |= MALI_GRALLOC_FORMAT_CAPABILITY_AFBC_YUV_WRITE;
 
 	cam_runtime_caps.caps_mask |= MALI_GRALLOC_FORMAT_CAPABILITY_OPTIONS_PRESENT;
 
@@ -343,6 +344,28 @@ static uint16_t get_consumers(uint64_t usage)
 	return consumers;
 }
 
+/*
+ * Video decoder producer can be signalled by a combination of usage flags
+ * (see definition of GRALLOC_USAGE_DECODER).
+ * However, individual HAL usage bits may also signal it.
+ * This function handles both cases.
+ *
+ * @param usage  [in]    Buffer usage.
+ *
+ * @return The corresponding producer flag, or 0 if the producer is not a VPU.
+ */
+static uint16_t get_vpu_producer(uint64_t usage)
+{
+	if ((usage & GRALLOC_USAGE_DECODER) == GRALLOC_USAGE_DECODER)
+	{
+		return MALI_GRALLOC_PRODUCER_VPU;
+	}
+	if (usage & GRALLOC_USAGE_VIDEO_DECODER)
+	{
+		return MALI_GRALLOC_PRODUCER_VPU;
+	}
+	return 0;
+}
 
 /*
  * Determines all IP producers included by the requested buffer usage.
@@ -399,13 +422,10 @@ static uint16_t get_producers(uint64_t usage)
 			producers |= MALI_GRALLOC_PRODUCER_CAM;
 		}
 
-		/* Video decoder producer is signalled by a combination of usage flags
-		 * (see definition of GRALLOC_USAGE_DECODER).
-		 */
-		if ((usage & GRALLOC_USAGE_DECODER) == GRALLOC_USAGE_DECODER &&
-		    vpu_runtime_caps.caps_mask & MALI_GRALLOC_FORMAT_CAPABILITY_OPTIONS_PRESENT)
+
+		if ((vpu_runtime_caps.caps_mask & MALI_GRALLOC_FORMAT_CAPABILITY_OPTIONS_PRESENT))
 		{
-			producers |= MALI_GRALLOC_PRODUCER_VPU;
+			producers |= get_vpu_producer(usage);
 		}
 	}
 
