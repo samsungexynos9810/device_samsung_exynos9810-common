@@ -414,8 +414,10 @@ struct private_handle_t
 				"req_format(0x%x) "
 				"usage_pc(0x%" PRIx64 " 0x%" PRIx64 ") "
 				"interal_format(0x%" PRIx64 ") "
-				"width height (%d %d) "
-				"stride(%d) byte_stride(%d) internal_wh(%d %d) "
+				"stride(%d)"
+				"plane[0] (offset(%d) byte_stride(%d) internal_wh(%d %d)) "
+				"plane[1] (offset(%d) byte_stride(%d) internal_wh(%d %d)) "
+				"plane[2] (offset(%d) byte_stride(%d) internal_wh(%d %d)) "
 				"alloc_format(0x%" PRIx64 ") "
 				"size(%d %d %d) "
 				"layer_count(%d) plane_count(%d)"
@@ -428,8 +430,10 @@ struct private_handle_t
 				req_format,
 				producer_usage, consumer_usage,
 				internal_format,
-				width, height,
-				stride, plane_info[0].byte_stride, plane_info[0].alloc_width, plane_info[0].alloc_height,
+				stride,
+				plane_info[0].offset, plane_info[0].byte_stride, plane_info[0].alloc_width, plane_info[0].alloc_height,
+				plane_info[1].offset, plane_info[1].byte_stride, plane_info[1].alloc_width, plane_info[1].alloc_height,
+				plane_info[2].offset, plane_info[2].byte_stride, plane_info[2].alloc_width, plane_info[2].alloc_height,
 				alloc_format,
 				sizes[0], sizes[1], sizes[2],
 				layer_count, plane_count,
