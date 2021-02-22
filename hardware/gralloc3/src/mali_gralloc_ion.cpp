@@ -696,6 +696,7 @@ static int allocate_to_fds(buffer_descriptor_t *bufDescriptor, enum ion_heap_typ
 			goto err;
 		}
 
+		usage = usage & ~GRALLOC1_PRODUCER_USAGE_PROTECTED;
 		fd_arr[idx] = alloc_from_ion_heap(usage, VIDEO_PRIV_DATA_SIZE, ION_HEAP_TYPE_SYSTEM, 0, min_pgsz);
 		if (fd_arr[idx] < 0)
 		{
