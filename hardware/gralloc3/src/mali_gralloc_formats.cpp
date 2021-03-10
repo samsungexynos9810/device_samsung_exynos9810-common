@@ -1548,6 +1548,9 @@ uint32_t get_base_format(const uint64_t req_format,
 	/* Map Android flexible formats to internal base formats */
 	if (req_format == HAL_PIXEL_FORMAT_IMPLEMENTATION_DEFINED)
 	{
+		auto consumers = get_consumers(usage);
+		auto producers = get_producers(usage);
+
 		if ((usage & GRALLOC1_CONSUMER_USAGE_GPU_TEXTURE) || (usage & GRALLOC1_CONSUMER_USAGE_HWCOMPOSER))
 		{
 			if(usage & GRALLOC1_CONSUMER_USAGE_YUV_RANGE_FULL)
@@ -1558,6 +1561,14 @@ uint32_t get_base_format(const uint64_t req_format,
 			{
 				base_format = HAL_PIXEL_FORMAT_EXYNOS_YCrCb_420_SP_M;    //NV21M narrow
 			}
+		}
+		else if ((producers & MALI_GRALLOC_PRODUCER_CAM) && (consumers == MALI_GRALLOC_CONSUMER_VPU))
+		{
+			// Allocated buffer is SBWC compressed when MFC is the sole consumer for
+			// camera buffers. But, we cannot differentiate the type of video encoder
+			// on gralloc3. Since BO does not support encoding in P21, it is safe to
+			// enable SBWC for all camera buffers.
+			base_format = HAL_PIXEL_FORMAT_EXYNOS_YCbCr_420_SP_M_SBWC;
 		}
 		else if (usage & GRALLOC1_CONSUMER_USAGE_VIDEO_ENCODER)
 		{
