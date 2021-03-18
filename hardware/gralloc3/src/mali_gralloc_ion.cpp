@@ -1095,10 +1095,7 @@ int import_exynos_ion_handles(private_handle_t *hnd)
 	int retval = -1;
 
 #if GRALLOC_VERSION_MAJOR <= 1
-	/* the test condition is set to ion_client <= 0 here, because
-	 * a second user process should get a ion fd greater than 0.
-	 */
-	if (ion_client <= 0)
+	if (ion_client < 0)
 	{
 		/* a second user process must obtain a client handle first via ion_open before it can obtain the shared ion buffer*/
 		int status = 0;
@@ -1162,10 +1159,7 @@ int mali_gralloc_ion_map(private_handle_t *hnd)
 	if (hnd->flags & private_handle_t::PRIV_FLAGS_USES_ION)
 	{
 #if GRALLOC_VERSION_MAJOR <= 1
-		/* the test condition is set to ion_client <= 0 here, because
-		 * a second user process should get a ion fd greater than 0.
-		 */
-		if (ion_client <= 0)
+		if (ion_client < 0)
 		{
 			/* a second user process must obtain a client handle first via ion_open before it can obtain the shared ion buffer*/
 			int status = 0;
