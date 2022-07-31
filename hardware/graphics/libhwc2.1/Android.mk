@@ -44,6 +44,7 @@ LOCAL_CFLAGS += -DLOG_TAG=\"hwcomposer\"
 LOCAL_PROPRIETARY_MODULE := true
 
 LOCAL_C_INCLUDES += \
+	$(TOP)/device/samsung/exynos9810-common/hardware/include \
 	$(TOP)/device/samsung/exynos9810-common/hardware/graphics/libhwc2.1/libdevice \
 	$(TOP)/device/samsung/exynos9810-common/hardware/graphics/libhwc2.1/libmaindisplay \
 	$(TOP)/device/samsung/exynos9810-common/hardware/graphics/libhwc2.1/libexternaldisplay \
