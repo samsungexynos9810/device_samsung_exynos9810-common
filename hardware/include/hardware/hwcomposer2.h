@@ -173,6 +173,7 @@ typedef enum {
      * either HWC2_COMPOSITION_DEVICE or HWC2_COMPOSITION_CLIENT, but it is
      * unlikely that content will display correctly in these cases. */
     HWC2_COMPOSITION_SIDEBAND = 5,
+    HWC2_COMPOSITION_SCREENSHOT = 6,
 } hwc2_composition_t;
 
 /* Possible connection options from the hotplug callback */
@@ -830,6 +831,7 @@ enum class Composition : int32_t {
     SolidColor = HWC2_COMPOSITION_SOLID_COLOR,
     Cursor = HWC2_COMPOSITION_CURSOR,
     Sideband = HWC2_COMPOSITION_SIDEBAND,
+    Screenshot = HWC2_COMPOSITION_SCREENSHOT,
 };
 TO_STRING(hwc2_composition_t, Composition, getCompositionName)
 

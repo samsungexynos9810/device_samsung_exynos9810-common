@@ -286,6 +286,8 @@ typedef struct hwc_layer_1 {
              * their origin is the top-left corner.
              */
             hwc_region_t surfaceDamage;
+
+            uint32_t dataSpace; /* added for exynos */
         };
     };
 
