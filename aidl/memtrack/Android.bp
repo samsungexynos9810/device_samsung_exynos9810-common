@@ -12,20 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package {
-    // See: http://go/android-license-faq
-    // A large-scale-change added 'default_applicable_licenses' to import
-    // all of the 'license_kinds' from "hardware_interfaces_license"
-    // to get the below license kinds:
-    //   SPDX-license-identifier-Apache-2.0
-    default_applicable_licenses: ["hardware_interfaces_license"],
-}
-
 cc_binary {
-    name: "android.hardware.memtrack-service.example",
+    name: "android.hardware.memtrack-service.exynos9810",
     relative_install_path: "hw",
-    init_rc: ["memtrack-default.rc"],
-    vintf_fragments: ["memtrack-default.xml"],
+    init_rc: ["memtrack-exynos9810.rc"],
+    vintf_fragments: ["memtrack-exynos9810.xml"],
     vendor: true,
     shared_libs: [
         "libbase",
