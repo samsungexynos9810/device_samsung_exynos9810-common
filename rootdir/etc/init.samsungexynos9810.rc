@@ -295,6 +295,12 @@ on init
     write /dev/stune/top-app/schedtune.gb_duration 25
     write /dev/stune/top-app/schedtune.gb_balance_ratio 55
 
+on late-init
+    # Start services for bootanim
+    start surfaceflinger
+    start bootanim
+    start vendor.hwcomposer-2-4
+
 on post-fs
     # set RLIMIT_MEMLOCK to 64MB
     setrlimit 8 67108864 67108864
