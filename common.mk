@@ -198,7 +198,7 @@ PRODUCT_PACKAGES += \
 
 # Memtrack
 PRODUCT_PACKAGES += \
-    android.hardware.memtrack-service.exynos9810
+    android.hardware.memtrack-service.exynos9810-mali
 
 # NFC
 PRODUCT_PACKAGES += \

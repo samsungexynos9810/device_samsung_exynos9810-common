@@ -1,4 +1,0 @@
-service vendor.memtrack-default /vendor/bin/hw/android.hardware.memtrack-service.exynos9810
-    class hal
-    user nobody
-    group system
