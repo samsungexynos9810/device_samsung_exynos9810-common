@@ -198,6 +198,9 @@ static void ion_query_heaps(int ion_fd) {
     if (query.cnt > ION_NUM_HEAP_IDS)
         query.cnt = ION_NUM_HEAP_IDS;
 
+    for (i = 0; i < ION_NUM_HEAP_IDS; i++)
+         ion_heap_list[i].type = ION_HEAP_TYPE_NONE;
+
     for (i = 0; i < query.cnt; i++) {
         if (data[i].heap_id < ION_NUM_HEAP_IDS) {
             strncpy(ion_heap_list[data[i].heap_id].name, data[i].name, MAX_HEAP_NAME);
@@ -206,9 +209,6 @@ static void ion_query_heaps(int ion_fd) {
             ion_heap_list[data[i].heap_id].type = data[i].type;
         }
     }
-
-    while (i < ION_NUM_HEAP_IDS)
-        ion_heap_list[i++].type = ION_HEAP_TYPE_NONE;
 }
 
 enum ion_version { ION_VERSION_UNKNOWN, ION_VERSION_MODERN, ION_VERSION_LEGACY };
