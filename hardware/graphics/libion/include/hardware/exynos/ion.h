@@ -19,6 +19,8 @@
 #ifndef __HARDWARE_EXYNOS_ION_H__
 #define __HARDWARE_EXYNOS_ION_H__
 
+#include <sys/types.h>
+
 #define ION_EXYNOS_HEAP_ID_SYSTEM        0
 #define ION_EXYNOS_HEAP_ID_CRYPTO        1
 #define ION_EXYNOS_HEAP_ID_VIDEO_STREAM  3
