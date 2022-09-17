@@ -28,5 +28,3 @@ cc_library {
     ],
     cflags: ["-Werror"],
 }
-
-subdirs = ["test"]
