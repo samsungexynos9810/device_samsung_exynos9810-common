@@ -47,6 +47,7 @@
 #define ION_FLAG_PROTECTED 16
 #define ION_FLAG_SYNC_FORCE 32
 #define ION_FLAG_MAY_HWRENDER 64
+#define ION_FLAG_HW_EXTRA 128
 
 #define ION_SYNC_READ      (1 << 0)
 #define ION_SYNC_WRITE     (2 << 0)
