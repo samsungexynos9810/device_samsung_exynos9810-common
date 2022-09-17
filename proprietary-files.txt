@@ -147,10 +147,6 @@ vendor/lib/libmalicore.bc
 vendor/lib64/libmalicore.bc
 -vendor/lib64/libgpudataproducer.so|89e0d2aa05d2fc47822a980e5946840ec66e9597
 
-# Ion - N770FXXS7DUB1
--vendor/lib/libion_exynos.so|b4ec36fd10f1be7a3fa48968f254e69f
--vendor/lib64/libion_exynos.so|382e96e09fdc5b4537ca43a8c3eda362
-
 # Keymaster
 -vendor/lib64/hw/keystore.mdfpp.so
 -vendor/lib64/libkeymaster2_mdfpp.so
