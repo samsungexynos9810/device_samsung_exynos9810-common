@@ -150,6 +150,7 @@ PRODUCT_PACKAGES += \
 # Graphics
 PRODUCT_PACKAGES += \
     libexynosutils \
+    libexynosscaler \
     libion_exynos
 
 # Health

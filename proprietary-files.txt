@@ -267,7 +267,6 @@ vendor/openvx/xml/_hifi_still_schedule.xml
 -vendor/lib/libexynosdisplay.so|425a0ae03ff5050098b6be9d3c5a316f
 -vendor/lib/libexynosgscaler.so|2ebf8fa0fdf6013f69e949928c8ae0f6
 -vendor/lib/libexynosgraphicbuffer.so|b807c5e1b4b06160bdbc9e4b8b36fdd8
--vendor/lib/libexynosscaler.so|747ce7828362042b57f07b9e2e234555
 -vendor/lib/libexynosv4l2.so|ca5ed48c1a47fbc67e75fa0ef441b96d206722b9
 -vendor/lib64/hw/hwcomposer.exynos9810.so|1b5d5b6bee0b1fd8f603edb3e9698507
 -vendor/lib64/libExynosHWCService.so|6b0c1ccee9ccc00c349fb9b9aeac3cd9
@@ -278,7 +277,6 @@ vendor/openvx/xml/_hifi_still_schedule.xml
 -vendor/lib64/libexynosdisplay.so|2b16c674a3a80274431dc8c51dea4bf6
 -vendor/lib64/libexynosgscaler.so|6c1bbf9d68071bfce8f1d586247f69e9
 -vendor/lib64/libexynosgraphicbuffer.so|6d9f792ecadcef91e55921e54634d711
--vendor/lib64/libexynosscaler.so|aa7b88a4fb053a0df8c01e601a3246dd
 -vendor/lib64/libexynosv4l2.so|5f4f040e5ebd8a28914f55e70484657fcab89e2f
 -vendor/lib64/libmpp.so
 
