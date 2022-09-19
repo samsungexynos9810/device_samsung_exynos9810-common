@@ -84,6 +84,9 @@ USE_OPENGL_RENDERER          := true
 BOARD_USES_SCALER_M2M1SHOT   := true
 BOARD_USES_ALIGN_RESTRICTION := true
 
+# Headers
+TARGET_BOARD_KERNEL_HEADERS := device/samsung/exynos9810-common/kernel-headers
+
 # HWUI
 HWUI_COMPILE_FOR_PERF := true
 
