@@ -21,18 +21,18 @@ LOCAL_SRC_FILES := \
 LOCAL_CFLAGS += $(PV_CFLAGS_MINUS_VISIBILITY)
 
 LOCAL_C_INCLUDES:= \
-      frameworks/native/include/media/hardware \
-      frameworks/native/include/media/openmax \
-      frameworks/native/include
+    frameworks/native/include/media/hardware \
+    frameworks/native/include/media/openmax \
+    frameworks/native/include
 
 LOCAL_SHARED_LIBRARIES :=    \
-        libbinder            \
-        libutils             \
-        libcutils            \
-        libui                \
-        libdl                \
-        libstagefright_foundation \
-        liblog
+    libbinder \
+    libutils \
+    libcutils \
+    libui \
+    libdl \
+    libstagefright_foundation \
+    liblog
 
 LOCAL_MODULE := libstagefrighthw
 ifeq ($(BOARD_USES_VENDORIMAGE), true)

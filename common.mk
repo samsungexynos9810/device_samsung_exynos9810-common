@@ -357,6 +357,10 @@ PRODUCT_DEXPREOPT_SPEED_APPS += \
     Settings \
     SystemUI
 
+# Stagefright
+PRODUCT_PACKAGES += \
+    libstagefrighthw
+
 # Thermal
 PRODUCT_PACKAGES += \
     android.hardware.thermal@1.0-impl \

@@ -65,7 +65,6 @@ vendor/firmware/vts.bin
 -vendor/lib/libhfd.so
 -vendor/lib/libhwjpeg.so
 -vendor/lib/libsensorlistener.so
--vendor/lib/libstagefrighthw.so|35aaf824f9b9a6c885e090c16444a86f
 -vendor/lib/libuniapi.so
 -vendor/lib/libuniplugin.so
 -vendor/lib/libvkmanager_vendor.so
@@ -75,7 +74,6 @@ vendor/firmware/vts.bin
 -vendor/lib64/libgiantmscl.so|bee49bab0d1d26f2a90bed25f48ecf83
 -vendor/lib64/libhwjpeg.so
 -vendor/lib64/libsensorlistener.so
--vendor/lib64/libstagefrighthw.so|3f19493241c30d9edfb04fea85a594b1
 -vendor/lib64/libuniapi.so
 -vendor/lib64/libuniplugin.so
 -vendor/lib64/libvkmanager_vendor.so
