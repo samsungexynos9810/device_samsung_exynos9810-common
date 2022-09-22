@@ -19,8 +19,8 @@
 #ifndef ___SAMSUNG_DECON_H__
 #define ___SAMSUNG_DECON_H__
 #include "DeconCommonHeader.h"
-#define S3C_FB_MAX_WIN (4)
-#define MAX_DECON_WIN (4)
+#define S3C_FB_MAX_WIN (6)
+#define MAX_DECON_WIN (6)
 #define DECON_WIN_UPDATE_IDX MAX_DECON_WIN
 #define MAX_PLANE_CNT (3)
 #define SUCCESS_EXYNOS_SMC 0
@@ -31,10 +31,8 @@ typedef uint64_t dma_addr_t;
 #else
 typedef uint32_t dma_addr_t;
 #endif
-#define CHIP_VER (9610)
+#define CHIP_VER (9810)
 #define MAX_RES_NUMBER 5
-#define MAX_FMT_CNT 64
-#define MAX_DPP_CNT 7
 struct lcd_res_info {
   unsigned int width;
   unsigned int height;
@@ -62,8 +60,10 @@ struct decon_rect {
 enum decon_idma_type {
   IDMA_G0 = 0,
   IDMA_G1,
-  IDMA_GF,
-  IDMA_VGS0,
+  IDMA_VG0,
+  IDMA_VG1,
+  IDMA_VGF0,
+  IDMA_VGRF0,
   MAX_DECON_DMA_TYPE,
 };
 struct decon_user_window {
@@ -104,7 +104,7 @@ struct decon_win_config {
       int plane_alpha;
       enum decon_blending blending;
       enum decon_idma_type idma_type;
-      enum decon_pixel_format format;
+      u32 format;
       struct dpp_params dpp_parm;
       struct decon_win_rect block_area;
       struct decon_win_rect transparent_area;

@@ -16,25 +16,16 @@
 
 #include "ExynosDisplayFbInterfaceModule.h"
 
-decon_idma_type getIDMAType(ExynosMPP *otfMPP) {
+decon_idma_type getDPPChannel(ExynosMPP *otfMPP) {
     if (otfMPP == NULL)
         return MAX_DECON_DMA_TYPE;
 
-    if (otfMPP->mPhysicalType == MPP_DPP_GF)
-        return (decon_idma_type)((uint32_t)IDMA_GF);
-    else if (otfMPP->mPhysicalType == MPP_DPP_VGS)
-        return (decon_idma_type)((uint32_t)IDMA_VGS0);
-    else if (otfMPP->mPhysicalType == MPP_DPP_G) {
-        switch (otfMPP->mPhysicalIndex) {
-            case 0:
-                return IDMA_G0;
-            case 1:
-                return IDMA_G1;
-            default:
-                return MAX_DECON_DMA_TYPE;
-        }
-    } else
-        return MAX_DECON_DMA_TYPE;
+    for (int i=0; i < MAX_DECON_DMA_TYPE; i++){
+        if((IDMA_CHANNEL_MAP[i].type == otfMPP->mPhysicalType) &&
+           (IDMA_CHANNEL_MAP[i].index == otfMPP->mPhysicalIndex))
+            return IDMA_CHANNEL_MAP[i].channel;
+    }
+    return MAX_DECON_DMA_TYPE;
 }
 
 //////////////////////////////////////////////////// ExynosPrimaryDisplayFbInterfaceModule //////////////////////////////////////////////////////////////////
@@ -49,7 +40,7 @@ ExynosPrimaryDisplayFbInterfaceModule::~ExynosPrimaryDisplayFbInterfaceModule()
 
 decon_idma_type ExynosPrimaryDisplayFbInterfaceModule::getDeconDMAType(ExynosMPP *otfMPP)
 {
-    return getIDMAType(otfMPP);
+    return getDPPChannel(otfMPP);
 }
 
 //////////////////////////////////////////////////// ExynosExternalDisplayFbInterfaceModule //////////////////////////////////////////////////////////////////
@@ -64,5 +55,5 @@ ExynosExternalDisplayFbInterfaceModule::~ExynosExternalDisplayFbInterfaceModule(
 
 decon_idma_type ExynosExternalDisplayFbInterfaceModule::getDeconDMAType(ExynosMPP *otfMPP)
 {
-    return getIDMAType(otfMPP);
+    return getDPPChannel(otfMPP);
 }

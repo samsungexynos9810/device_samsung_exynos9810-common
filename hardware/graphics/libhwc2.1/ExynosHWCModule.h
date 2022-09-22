@@ -24,8 +24,8 @@
 #define HWC_VERSION     HWC_DEVICE_API_VERSION_1_5
 
 #define VSYNC_DEV_PREFIX "/sys/devices/platform/"
-#define PSR_DEV_NAME  "148b0000.decon_f/psr_info"
-#define DP_LINK_NAME	"13090000.displayport"
+#define PSR_DEV_NAME  "16030000.decon_f/psr_info"
+#define DP_LINK_NAME	"10ab0000.displayport"
 #define DP_UEVENT_NAME	"change@/devices/platform/%s/extcon/extcon0"
 #define DP_CABLE_STATE_NAME "/sys/devices/platform/%s/extcon/extcon0/cable.%d/state"
 #define FORCE_DISABLE_DR
@@ -53,7 +53,17 @@ struct exynos_mpp_t {
 };
 
 /* not use this */
-const dpp_channel_map_t IDMA_CHANNEL_MAP[] = {};
+const dpp_channel_map_t IDMA_CHANNEL_MAP[] = {
+    /* GF physical index is switched to change assign order */
+    {MPP_DPP_G,      1, IDMA_G0,    IDMA(0)},
+    {MPP_DPP_G,      0, IDMA_G1,    IDMA(1)},
+    {MPP_DPP_VG,     0, IDMA_VG0,   IDMA(2)},
+    {MPP_DPP_VG,     0, IDMA_VG1,   IDMA(3)},
+    {MPP_DPP_VGF,    0, IDMA_VGF0,  IDMA(4)},
+    {MPP_DPP_VGRF,   0, IDMA_VGRF0, IDMA(5)},
+    {MPP_P_TYPE_MAX, 0, ODMA_WB,    IDMA(6)}, // not idma but..
+    {static_cast<mpp_phycal_type_t>(MAX_DECON_DMA_TYPE), 0, MAX_DECON_DMA_TYPE, IDMA(7)}
+};
 
 #define MAX_NAME_SIZE   32
 struct exynos_display_t {
@@ -94,8 +104,10 @@ enum {
 const exynos_mpp_t AVAILABLE_OTF_MPP_UNITS[] = {
     {MPP_DPP_G, MPP_LOGICAL_DPP_G, "DPP_G0", 0, 0, HWC_DISPLAY_PRIMARY_BIT|EXTERNAL_MAIN_DISPLAY_PRIMARY_BIT},
     {MPP_DPP_G, MPP_LOGICAL_DPP_G, "DPP_G1", 1, 0, HWC_DISPLAY_EXTERNAL_BIT|EXTERNAL_MAIN_DISPLAY_EXTERNAL_BIT},
-    {MPP_DPP_GF, MPP_LOGICAL_DPP_GF, "DPP_GF0", 0, 0, HWC_DISPLAY_PRIMARY_BIT|EXTERNAL_MAIN_DISPLAY_EXTERNAL_BIT},
-    {MPP_DPP_VGS, MPP_LOGICAL_DPP_VGS, "DPP_VGS0", 0, 0, HWC_DISPLAY_EXTERNAL_BIT|EXTERNAL_MAIN_DISPLAY_EXTERNAL_BIT},
+    {MPP_DPP_VG, MPP_LOGICAL_DPP_G, "DPP_VG0", 0, 0, HWC_DISPLAY_EXTERNAL_BIT|EXTERNAL_MAIN_DISPLAY_EXTERNAL_BIT},
+    {MPP_DPP_VG, MPP_LOGICAL_DPP_G, "DPP_VG1", 1, 0, HWC_DISPLAY_EXTERNAL_BIT|EXTERNAL_MAIN_DISPLAY_EXTERNAL_BIT},
+    {MPP_DPP_VGF, MPP_LOGICAL_DPP_GF, "DPP_VGF0", 0, 0, HWC_DISPLAY_PRIMARY_BIT|EXTERNAL_MAIN_DISPLAY_EXTERNAL_BIT},
+    {MPP_DPP_VGRF, MPP_LOGICAL_DPP_VGS, "DPP_VGRF0", 0, 0, HWC_DISPLAY_EXTERNAL_BIT|EXTERNAL_MAIN_DISPLAY_EXTERNAL_BIT},
 };
 
 const exynos_mpp_t AVAILABLE_M2M_MPP_UNITS[] = {
@@ -107,8 +119,8 @@ const exynos_mpp_t AVAILABLE_M2M_MPP_UNITS[] = {
 };
 
 const exynos_display_t AVAILABLE_DISPLAY_UNITS[] = {
-    {HWC_DISPLAY_PRIMARY, 0, "PrimaryDisplay", "/dev/graphics/fb0", "148b0000.decon_f/vsync"},
-    {HWC_DISPLAY_EXTERNAL, 0, "ExternalDisplay", "/dev/graphics/fb1", "148c0000.decon_t/vsync"},
+    {HWC_DISPLAY_PRIMARY, 0, "PrimaryDisplay", "/dev/graphics/fb0", "16030000.decon_f/vsync"},
+    {HWC_DISPLAY_EXTERNAL, 0, "ExternalDisplay", "/dev/graphics/fb1", "16050000.decon_t/vsync"},
     {HWC_DISPLAY_VIRTUAL, 0, "VirtualDisplay", {}, {}},
 };
 
