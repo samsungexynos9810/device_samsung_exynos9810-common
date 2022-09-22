@@ -1600,7 +1600,7 @@ bool ExynosMPP::canSkipProcessing()
     if (mMaxSrcLayerNum > 1) {
         dst = mAssignedDisplay->mExynosCompositionInfo.mDstImg;
     }
-    return ((needDstBufRealloc(dst, mCurrentDstBuf) == false) & canUsePrevFrame());
+    return ((needDstBufRealloc(dst, mCurrentDstBuf) == false) && canUsePrevFrame());
 
 }
 
