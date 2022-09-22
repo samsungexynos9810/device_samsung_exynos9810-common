@@ -386,7 +386,7 @@ public:
     */
 };
 
-IMPLEMENT_META_INTERFACE(ExynosHWCService, "android.hal.ExynosHWCService");
+DO_NOT_DIRECTLY_USE_ME_IMPLEMENT_META_INTERFACE(ExynosHWCService, "android.hal.ExynosHWCService");
 
 status_t BnExynosHWCService::onTransact(
     uint32_t code, const Parcel& data, Parcel* reply, uint32_t flags)
