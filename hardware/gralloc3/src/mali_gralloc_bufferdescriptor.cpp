@@ -249,7 +249,6 @@ int mali_gralloc_get_producer_usage_internal(buffer_handle_t buffer, uint64_t *o
 	return GRALLOC1_ERROR_NONE;
 }
 
-#if PLATFORM_SDK_VERSION >= 26
 int mali_gralloc_set_layer_count_internal(gralloc1_buffer_descriptor_t descriptor, uint32_t layerCount)
 {
 	buffer_descriptor_t *buffer_descriptor = (buffer_descriptor_t *)descriptor;
@@ -286,7 +285,6 @@ int mali_gralloc_get_layer_count_internal(buffer_handle_t buffer, uint32_t *outL
 	*outLayerCount = hnd->layer_count;
 	return GRALLOC1_ERROR_NONE;
 }
-#endif /* PLATFORM_SDK_VERSION >= 26 */
 
 #endif
 int mali_gralloc_query_getstride(buffer_handle_t buffer, int *pixelStride)

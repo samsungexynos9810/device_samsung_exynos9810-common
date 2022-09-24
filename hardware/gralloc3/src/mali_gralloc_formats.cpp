@@ -782,7 +782,6 @@ static uint8_t is_format_supported(const int32_t fmt_idx,
 
 	if (f_flags != F_NONE)
 	{
-#if PLATFORM_SDK_VERSION >= 26
 		if (formats[fmt_idx].id == MALI_GRALLOC_FORMAT_INTERNAL_RGBA_1010102 &&
 		    (producer_caps & consumer_caps & MALI_GRALLOC_FORMAT_CAPABILITY_PIXFMT_RGBA1010102) == 0)
 		{
@@ -794,7 +793,6 @@ static uint8_t is_format_supported(const int32_t fmt_idx,
 		{
 			f_flags = F_NONE;
 		}
-#endif
 	}
 
 	return f_flags;
@@ -1521,9 +1519,6 @@ uint32_t get_base_format(const uint64_t req_format,
 		 * MALI_GRALLOC_FORMAT_TYPE_INTERNAL) should be accepted, including
 		 * MALI_GRALLOC_FORMAT_INTERNAL_NV12 (same value as HAL_PIXEL_FORMAT_JPEG).
 		 */
-#if PLATFORM_SDK_VERSION >= 26 && PLATFORM_SDK_VERSION < 28
-		if (type == MALI_GRALLOC_FORMAT_TYPE_INTERNAL || req_format != HAL_PIXEL_FORMAT_JPEG)
-#endif
 		{
 			/* Mask out extension bits which could be present with type 'internal'. */
 			base_format = req_format & MALI_GRALLOC_INTFMT_FMT_MASK;

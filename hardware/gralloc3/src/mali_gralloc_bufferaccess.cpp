@@ -1218,7 +1218,6 @@ int mali_gralloc_lock_flex_async(const mali_gralloc_module *m,
 
 		break;
 
-#if PLATFORM_SDK_VERSION >= 26
 	/* 64-bit format that has 16-bit R, G, B, and A components, in that order */
 	case MALI_GRALLOC_FORMAT_INTERNAL_RGBA_16161616:
 		flex_layout->format = FLEX_FORMAT_RGBA;
@@ -1236,7 +1235,6 @@ int mali_gralloc_lock_flex_async(const mali_gralloc_module *m,
 		                      hnd->plane_info[0].byte_stride, 1, 1,
 		                      &flex_layout->planes[3]);
 		break;
-#endif
 
 	case MALI_GRALLOC_FORMAT_INTERNAL_RGBA_8888:
 		/* 32-bit format that has 8-bit R, G, B, and A components, in that order */

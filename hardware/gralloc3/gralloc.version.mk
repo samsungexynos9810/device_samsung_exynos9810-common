@@ -19,12 +19,7 @@
 GRALLOC_VALID_VERSIONS := 0.x 1.x 2.x
 
 #Set default Gralloc version
-PLATFORM_SDK_GREATER_THAN_24 := $(shell expr $(PLATFORM_SDK_VERSION) \> 24)
-ifeq ($(PLATFORM_SDK_GREATER_THAN_24), 1)
-    GRALLOC_API_VERSION?=1.x
-else
-    GRALLOC_API_VERSION?=0.x
-endif
+GRALLOC_API_VERSION?=1.x
 
 ifdef GRALLOC_USE_GRALLOC1_API
     ifeq ($(GRALLOC_USE_GRALLOC1_API), 1)
@@ -46,29 +41,14 @@ endif
 #       changed (somewhat) independently of each other. Scaled internal versions, encapsulating
 #       their major and minor versions, provide for building specific combinations
 ifeq ($(GRALLOC_API_VERSION), 2.x)
+    HIDL_IMAPPER_NAMESPACE := V2_1
+    HIDL_IALLOCATOR_NAMESPACE := V2_0
+    HIDL_COMMON_NAMESPACE := V1_1
 
-    ifeq ($(shell expr $(PLATFORM_SDK_VERSION) \> 27), 1)
-        HIDL_IMAPPER_NAMESPACE := V2_1
-        HIDL_IALLOCATOR_NAMESPACE := V2_0
-        HIDL_COMMON_NAMESPACE := V1_1
-
-        #Allocator = 2.0, Mapper = 2.1 and Common = 1.1
-        HIDL_ALLOCATOR_VERSION_SCALED := 200
-        HIDL_MAPPER_VERSION_SCALED := 210
-        HIDL_COMMON_VERSION_SCALED := 110
-
-    else ifeq ($(shell expr $(PLATFORM_SDK_VERSION) \> 25), 1)
-        HIDL_IMAPPER_NAMESPACE := V2_0
-        HIDL_IALLOCATOR_NAMESPACE := V2_0
-        HIDL_COMMON_NAMESPACE := V1_0
-
-        #Allocator = 2.0, Mapper = 2.0 and Common = 1.0
-        HIDL_ALLOCATOR_VERSION_SCALED := 200
-        HIDL_MAPPER_VERSION_SCALED := 200
-        HIDL_COMMON_VERSION_SCALED := 100
-    else
-        $(error Gralloc 2.x is not supported on platform SDK version $(PLATFORM_SDK_VERSION))
-    endif
+    #Allocator = 2.0, Mapper = 2.1 and Common = 1.1
+    HIDL_ALLOCATOR_VERSION_SCALED := 200
+    HIDL_MAPPER_VERSION_SCALED := 210
+    HIDL_COMMON_VERSION_SCALED := 110
 endif
 
 GRALLOC_VERSION_MAJOR := $(shell echo $(GRALLOC_API_VERSION) | cut -d. -f1)
