@@ -16,7 +16,6 @@
 # limitations under the License.
 
 TOP_LOCAL_PATH := $(call my-dir)
-MALI_GRALLOC_API_TESTS?=0
 
 ifdef GRALLOC_USE_GRALLOC1_API
     ifdef GRALLOC_API_VERSION
@@ -48,12 +47,6 @@ ifeq ($(shell expr $(GRALLOC_VERSION_MAJOR) \>= 2), 1)
    GRALLOC_MAPPER := 1
    $(info Build Gralloc mapper for 2.x)
    include $(TOP_LOCAL_PATH)/src/Android.mk
-endif
-
-# Build gralloc api tests.
-ifeq ($(MALI_GRALLOC_API_TESTS), 1)
-$(info Build gralloc API tests.)
-include $(TOP_LOCAL_PATH)/api_tests/Android.mk
 endif
 
 ####################################################################################################
