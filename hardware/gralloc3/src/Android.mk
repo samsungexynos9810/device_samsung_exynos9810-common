@@ -208,7 +208,7 @@ ifeq ($(shell expr $(GRALLOC_VERSION_MAJOR) \<= 1), 1)
     ifeq ($(TARGET_SOC),)
         LOCAL_MODULE := gralloc.default
     else
-        LOCAL_MODULE := gralloc.$(TARGET_SOC)
+        LOCAL_MODULE := gralloc.exynos9810
     endif
 else ifeq ($(GRALLOC_VERSION_MAJOR), 2)
     ifeq ($(GRALLOC_MAPPER), 1)

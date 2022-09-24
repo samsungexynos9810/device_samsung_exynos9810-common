@@ -114,10 +114,6 @@ vendor/firmware/mfc_fw.bin
 -vendor/lib/hw/gatekeeper.exynos9810.so
 -vendor/lib64/hw/gatekeeper.exynos9810.so
 
-# Gralloc - N770FXXS7DUB1
--vendor/lib/hw/gralloc.exynos9810.so|78819a1261deff4862ca39a244d8e1bf
--vendor/lib64/hw/gralloc.exynos9810.so|012cccf9d341e8c0851727e4998f77c5
-
 # GPS/GNSS
 -vendor/bin/hw/gpsd
 -vendor/bin/hw/lhd
@@ -258,7 +254,6 @@ vendor/openvx/xml/_hifi_still_schedule.xml
 # Samsung SLSI HWC - N770FXXS7DUB1
 -vendor/lib/hw/hwcomposer.exynos9810.so|73e463d71a96c034dfcba3428bb774b9
 -vendor/lib/libExynosHWCService.so|2900bcab8831321efb229c49180a7628
--vendor/lib/libGrallocWrapper.so|aa35df72178fa249a6fbab5700980d2e
 -vendor/lib/libacryl.so|8d88729095122797ca236da2f714b3a6
 -vendor/lib/libdrm.so|b007d52ea900b1cd486e4f4ab3773dd2
 -vendor/lib/libdrmresource.so|89b5ad323d2f77512ae0c7bd4fac1661
@@ -267,7 +262,6 @@ vendor/openvx/xml/_hifi_still_schedule.xml
 -vendor/lib/libexynosv4l2.so|ca5ed48c1a47fbc67e75fa0ef441b96d206722b9
 -vendor/lib64/hw/hwcomposer.exynos9810.so|1b5d5b6bee0b1fd8f603edb3e9698507
 -vendor/lib64/libExynosHWCService.so|6b0c1ccee9ccc00c349fb9b9aeac3cd9
--vendor/lib64/libGrallocWrapper.so|622ad3852f58c7730b54384bd3d6a3c3
 -vendor/lib64/libacryl.so|14d3ce0d2ac0cfb6db83fa63acc4fe94
 -vendor/lib64/libdrm.so|01b0a906fbd286a22931406568749332
 -vendor/lib64/libdrmresource.so|4a31bbfec97aed6ea4125e898f6863d3

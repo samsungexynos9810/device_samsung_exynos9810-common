@@ -147,6 +147,11 @@ PRODUCT_PACKAGES += \
     android.hardware.gatekeeper@1.0-impl:64 \
     android.hardware.gatekeeper@1.0-service
 
+# Gralloc
+PRODUCT_PACKAGES += \
+    libGrallocWrapper \
+    gralloc.exynos9810
+
 # Graphics
 PRODUCT_PACKAGES += \
     libexynosutils \
