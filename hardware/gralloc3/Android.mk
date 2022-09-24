@@ -57,7 +57,7 @@ LOCAL_SHARED_LIBRARIES := liblog libcutils libutils android.hardware.graphics.al
 	libsync libhardware libhidlbase
 
 LOCAL_C_INCLUDES := \
-    $(TOP)/hardware/samsung_slsi/exynos/include
+    $(TOP)/device/samsung/exynos9810-common/hardware/include
 
 LOCAL_SRC_FILES := 	\
 	GrallocWrapper.cpp

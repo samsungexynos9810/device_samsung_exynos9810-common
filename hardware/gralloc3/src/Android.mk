@@ -120,7 +120,7 @@ endif
 endif
 
 LOCAL_C_INCLUDES := $(MALI_LOCAL_PATH) $(MALI_DDK_INCLUDES) \
-    $(TOP)/hardware/samsung_slsi/exynos/include
+    $(TOP)/device/samsung/exynos9810-common/hardware/include
 
 # ALOGV flag
 LOCAL_CFLAGS += -DLOG_NDEBUG=$(MALI_GRALLOC_DISABLE_ALOGV)
@@ -289,7 +289,7 @@ include $(BUILD_SHARED_LIBRARY)
 #	libsync libhardware libhidlbase libhidltransport
 #
 #LOCAL_C_INCLUDES := \
-#    $(TOP)/hardware/samsung_slsi/exynos/include
+#    $(TOP)/device/samsung/exynos9810-common/hardware/include
 #
 #LOCAL_SRC_FILES := 	\
 #	GrallocWrapper.cpp
