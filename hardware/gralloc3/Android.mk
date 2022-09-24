@@ -62,9 +62,7 @@ LOCAL_C_INCLUDES := \
 LOCAL_SRC_FILES := 	\
 	GrallocWrapper.cpp
 
-ifeq ($(BOARD_USES_VENDORIMAGE), true)
 LOCAL_PROPRIETARY_MODULE := true
-endif
 LOCAL_MODULE := libGrallocWrapper
 
 include $(BUILD_SHARED_LIBRARY)
