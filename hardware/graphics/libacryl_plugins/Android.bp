@@ -1,0 +1,8 @@
+cc_library {
+    name: "libacryl_plugin_slsi_hdr10",
+    proprietary: true,
+    srcs: ["libacryl_plugin_slsi_hdr10.cpp"],
+    shared_libs: ["liblog"],
+    header_libs: ["libacryl_hdrplugin_headers", "libsystem_headers"],
+    cflags: ["-Werror"],
+}
