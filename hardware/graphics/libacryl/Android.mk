@@ -19,45 +19,43 @@ include $(CLEAR_VARS)
 LOCAL_CFLAGS += -DLOG_TAG=\"libacryl\"
 #LOCAL_CFLAGS += -DLIBACRYL_DEBUG
 
-ifdef BOARD_LIBACRYL_DEFAULT_COMPOSITOR
-    LOCAL_CFLAGS += -DLIBACRYL_DEFAULT_COMPOSITOR=\"$(BOARD_LIBACRYL_DEFAULT_COMPOSITOR)\"
-else
-    LOCAL_CFLAGS += -DLIBACRYL_DEFAULT_COMPOSITOR=\"no_default_compositor\"
-endif
-ifdef BOARD_LIBACRYL_DEFAULT_SCALER
-    LOCAL_CFLAGS += -DLIBACRYL_DEFAULT_SCALER=\"$(BOARD_LIBACRYL_DEFAULT_SCALER)\"
-else
-    LOCAL_CFLAGS += -DLIBACRYL_DEFAULT_SCALER=\"no_default_scaler\"
-endif
-ifdef BOARD_LIBACRYL_DEFAULT_BLTER
-    LOCAL_CFLAGS += -DLIBACRYL_DEFAULT_BLTER=\"$(BOARD_LIBACRYL_DEFAULT_BLTER)\"
-else
-    LOCAL_CFLAGS += -DLIBACRYL_DEFAULT_BLTER=\"no_default_blter\"
-endif
+LOCAL_CFLAGS += \
+    -DLIBACRYL_DEFAULT_COMPOSITOR=\"mscl_9810\" \
+    -DLIBACRYL_DEFAULT_SCALER=\"mscl_9810\" \
+    -DLIBACRYL_DEFAULT_BLTER=\"fimg2d_9810_blter\" \
+    -DLIBACRYL_G2D9810_HDR_PLUGIN
 
-LOCAL_SHARED_LIBRARIES := liblog libutils libcutils libion_exynos
-ifdef BOARD_LIBACRYL_G2D9810_HDR_PLUGIN
-    LOCAL_SHARED_LIBRARIES += $(BOARD_LIBACRYL_G2D9810_HDR_PLUGIN)
-    LOCAL_CFLAGS += -DLIBACRYL_G2D9810_HDR_PLUGIN
-endif
+LOCAL_SHARED_LIBRARIES := \
+    liblog \
+    libutils \
+    libcutils \
+    libion_exynos \
+    libacryl_plugin_slsi_hdr10
 
-LOCAL_HEADER_LIBRARIES += libacryl_hdrplugin_headers
-LOCAL_HEADER_LIBRARIES += libexynos_headers
+LOCAL_HEADER_LIBRARIES += \
+    libacryl_hdrplugin_headers \
+    libexynos_headers
 
-LOCAL_C_INCLUDES := $(LOCAL_PATH)/local_include
-LOCAL_C_INCLUDES += $(LOCAL_PATH)/include
+LOCAL_C_INCLUDES := \
+    $(LOCAL_PATH)/local_include \
+    $(LOCAL_PATH)/include
 
 LOCAL_EXPORT_C_INCLUDE_DIRS := $(LOCAL_PATH)/include
 
-LOCAL_SRC_FILES := acrylic.cpp acrylic_dummy.cpp
-LOCAL_SRC_FILES += acrylic_g2d.cpp acrylic_mscl9810.cpp acrylic_g2d9810.cpp acrylic_mscl3830.cpp acrylic_mscl3830_pre.cpp
-LOCAL_SRC_FILES += acrylic_factory.cpp acrylic_layer.cpp acrylic_formats.cpp
-LOCAL_SRC_FILES += acrylic_performance.cpp acrylic_device.cpp
+LOCAL_SRC_FILES := \
+    acrylic.cpp acrylic_dummy.cpp \
+    acrylic_g2d.cpp \
+    acrylic_mscl9810.cpp \
+    acrylic_g2d9810.cpp \
+    acrylic_mscl3830.cpp \
+    acrylic_mscl3830_pre.cpp \
+    acrylic_factory.cpp acrylic_layer.cpp \
+    acrylic_formats.cpp \
+    acrylic_performance.cpp \
+    acrylic_device.cpp
 
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE := libacryl
-ifeq ($(BOARD_USES_VENDORIMAGE), true)
 LOCAL_PROPRIETARY_MODULE := true
-endif
 
 include $(BUILD_SHARED_LIBRARY)
