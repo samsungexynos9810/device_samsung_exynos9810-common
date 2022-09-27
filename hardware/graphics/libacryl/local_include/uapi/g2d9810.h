@@ -29,6 +29,9 @@ extern "C" {
 #define G2D_SWZ_xBGR           0x5012
 #define G2D_SWZ_xRGB           0x5210
 
+#define G2D_SWZ_ALPHA_MASK     (0xF << 12)
+#define G2D_SWZ_ALPHA_ONE      (0x5 << 12)
+
 #define G2D_YUVORDER_MASK      (0x3 << 24)
 
 #define G2D_YUV_UV             ((1 << 24) | G2D_SWZ_ARGB)

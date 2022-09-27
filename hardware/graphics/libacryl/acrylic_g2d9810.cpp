@@ -700,6 +700,21 @@ bool AcrylicCompositorG2D9810::prepareSource(AcrylicLayer &layer, struct g2d_lay
         cmd[G2DSFR_SRC_BLEND] = G2D_BLEND_NONE;
     } else {
         cmd[G2DSFR_SRC_BLEND] = G2D_BLEND_SRCCOPY;
+
+        // HWC_BLEND_NONE is used not to appear its lower layer to target layer.
+        // But, when G2D output is reused by DPU, lower layer could appear to target layer.
+        // To prevent this, when blend mode is HWC_BLEND_NONE, make alpha channel max.
+        // Example case is as follow.
+        // If G2D composites several layers and topmost layer is HWC_BLEND_NONE
+        // and has alpha lower than max, that alpha value remains in target buffer.
+        // And if this result layer is recomposited with lower layer by DPU
+        // lower layer color appears to final result layer.
+        if ((cmd[G2DSFR_IMG_COLORMODE] == G2D_FMT_ABGR8888) ||
+            (cmd[G2DSFR_IMG_COLORMODE] == G2D_FMT_ARGB8888) ||
+            (cmd[G2DSFR_IMG_COLORMODE] == G2D_FMT_ABGR2101010)) {
+            cmd[G2DSFR_IMG_COLORMODE] &= ~G2D_SWZ_ALPHA_MASK;
+            cmd[G2DSFR_IMG_COLORMODE] |= G2D_SWZ_ALPHA_ONE;
+        }
     }
 
     cmd[G2DSFR_SRC_COMMAND] = G2D_LAYERCMD_VALID;
