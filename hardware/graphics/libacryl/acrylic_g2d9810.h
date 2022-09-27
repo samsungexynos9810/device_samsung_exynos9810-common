@@ -18,6 +18,8 @@
 #ifndef __HARDWARE_EXYNOS_HW2DCOMPOSITOR_G2D9810_H__
 #define __HARDWARE_EXYNOS_HW2DCOMPOSITOR_G2D9810_H__
 
+#include <memory>
+
 #include <hardware/exynos/acryl.h>
 
 #include <hardware/exynos/g2d9810_hdr_plugin.h>
@@ -28,18 +30,17 @@
 #include "acrylic_device.h"
 
 class G2DHdrWriter {
-    IG2DHdr10CommandWriter *mWriter;
-    g2d_commandlist *mCmds;
+    std::unique_ptr<IG2DHdr10CommandWriter> mWriter;
+    g2d_commandlist *mCmds = nullptr;
 public:
-    G2DHdrWriter() : mWriter(nullptr), mCmds(nullptr) {
+    G2DHdrWriter() {
 #ifdef LIBACRYL_G2D9810_HDR_PLUGIN
-        mWriter = IG2DHdr10CommandWriter::createInstance();
+        mWriter.reset(IG2DHdr10CommandWriter::createInstance());
 #endif
     }
 
     ~G2DHdrWriter() {
         putCommands();
-        delete mWriter;
     }
 
     bool setLayerStaticMetadata(int layer_index, int dataspace, unsigned int min_luminance, unsigned int max_luminance) {
