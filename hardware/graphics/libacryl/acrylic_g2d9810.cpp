@@ -863,6 +863,8 @@ bool AcrylicCompositorG2D9810::executeG2D(int fence[], unsigned int num_fences, 
         prepareSolidLayer(getCanvas(), mTask.source[0], mTask.commands.source[0]);
     }
 
+    mTask.commands.target[G2DSFR_DST_YCBCRMODE] = 0;
+
     CSCMatrixWriter cscMatrixWriter(mTask.commands.target[G2DSFR_IMG_COLORMODE],
                                     getCanvas().getDataspace(),
                                     &mTask.commands.target[G2DSFR_DST_YCBCRMODE]);
