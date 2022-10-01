@@ -634,10 +634,20 @@ bool AcrylicCompositorMSCL9810::requestPerformanceQoS(AcrylicPerformanceRequest 
 
     ctrl.id = SC_CID_FRAMERATE;
     ctrl.value = framerate;
+
+    if (mDev.ioctl(VIDIOC_S_CTRL, &ctrl) < 0) {
+        /*
+         * It doesn't return EINVAL by value.
+         * But in case of not supporting SC_CID_FRAMERATE it returns EINVAL.
+         * Some chips don't support this feature.So, just keep running.
+         */
+        if (errno != EINVAL) {
+            ALOGERR("Failed VIDIOC_S_CTRL: framerate=%d", ctrl.value);
+            return false;
+        }
+    }
+
     ALOGD_TEST("VIDIOC_S_CTRL: framerate=%d", ctrl.value);
-    /* For compatiblity, error is not returned. */
-    if (mDev.ioctl(VIDIOC_S_CTRL, &ctrl) < 0)
-        ALOGD("Trying set frame rate is failed, but ignored");
 
     return true;
 }
