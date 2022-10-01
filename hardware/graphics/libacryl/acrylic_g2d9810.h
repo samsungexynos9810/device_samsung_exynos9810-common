@@ -22,7 +22,7 @@
 
 #include <hardware/exynos/acryl.h>
 
-#include <hardware/exynos/g2d9810_hdr_plugin.h>
+#include <hardware/exynos/g2d_hdr_plugin.h>
 
 #include <uapi/g2d9810.h>
 

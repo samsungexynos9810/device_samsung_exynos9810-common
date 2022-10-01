@@ -22,7 +22,7 @@
 #define LOG_TAG "libacryl_plugin_slsi_hdr10"
 #include <log/log.h>
 
-#include <hardware/exynos/g2d9810_hdr_plugin.h>
+#include <hardware/exynos/g2d_hdr_plugin.h>
 
 enum {
     G2D_CSC_STD_UNDEFINED = -1,

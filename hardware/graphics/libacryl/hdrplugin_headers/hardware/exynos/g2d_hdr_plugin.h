@@ -16,8 +16,8 @@
  *  limitations under the License.
  */
 
-#ifndef __LIBACRYL_PLUGIN_G2D9810_HDR_H__
-#define __LIBACRYL_PLUGIN_G2D9810_HDR_H__
+#ifndef __LIBACRYL_PLUGIN_G2D_HDR_H__
+#define __LIBACRYL_PLUGIN_G2D_HDR_H__
 
 #include <uapi/g2d9810.h>
 
@@ -41,4 +41,4 @@ public:
     virtual void putCommands(struct g2d_commandlist __unused *commands) { };
 };
 
-#endif/* __LIBACRYL_PLUGIN_G2D9810_HDR_H__ */
+#endif/* __LIBACRYL_PLUGIN_G2D_HDR_H__ */
