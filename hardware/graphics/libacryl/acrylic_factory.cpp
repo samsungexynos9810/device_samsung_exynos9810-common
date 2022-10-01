@@ -25,7 +25,6 @@
 #include "acrylic_g2d.h"
 #include "acrylic_g2d9810.h"
 #include "acrylic_mscl9810.h"
-#include "acrylic_mscl3830.h"
 #include "acrylic_dummy.h"
 
 static uint32_t all_fimg2d_formats[] = {
@@ -515,28 +514,6 @@ const static stHW2DCapability __capability_mscl_sbwcl = {
     .base_align = 4,
 };
 
-const static stHW2DCapability __capability_mscl_3830 = {
-    .max_upsampling_num = {64, 64},
-    .max_downsampling_factor = {16, 16},
-    .max_upsizing_num = {64, 64},
-    .max_downsizing_factor = {16, 16},
-    .min_src_dimension = {16, 16},
-    .max_src_dimension = {8192, 8192},
-    .min_dst_dimension = {4, 4},
-    .max_dst_dimension = {8192, 8192},
-    .min_pix_align = {1, 1},
-    .rescaling_count = 0,
-    .compositing_mode = HW2DCapability::BLEND_NONE | HW2DCapability::BLEND_SRC_COPY | HW2DCapability::BLEND_SRC_OVER,
-    .transform_type = HW2DCapability::TRANSFORM_ALL,
-    .auxiliary_feature = 0,
-    .num_formats = ARRSIZE(all_mscl_formats),
-    .num_dataspaces = ARRSIZE(all_hwc_dataspaces),
-    .max_layers = 2,
-    .pixformats = all_mscl_formats,
-    .dataspaces = all_hwc_dataspaces,
-    .base_align = 4,
-};
-
 static const HW2DCapability capability_fimg2d_8895(__capability_fimg2d_8895);
 static const HW2DCapability capability_fimg2d_8890(__capability_fimg2d_8890);
 static const HW2DCapability capability_fimg2d_9610(__capability_fimg2d_9610);
@@ -547,7 +524,6 @@ static const HW2DCapability capability_fimg2d_9810_blter(__capability_fimg2d_981
 static const HW2DCapability capability_mscl_9810(__capability_mscl_9810);
 static const HW2DCapability capability_mscl_sbwc(__capability_mscl_sbwc);
 static const HW2DCapability capability_mscl_sbwcl(__capability_mscl_sbwcl);
-static const HW2DCapability capability_mscl_3830(__capability_mscl_3830);
 
 Acrylic *Acrylic::createInstance(const char *spec)
 {
@@ -577,8 +553,6 @@ Acrylic *Acrylic::createInstance(const char *spec)
         compositor = new AcrylicCompositorMSCL9810(capability_mscl_sbwc);
     } else if (strcmp(spec, "mscl_sbwcl") == 0) {
         compositor = new AcrylicCompositorMSCL9810(capability_mscl_sbwcl);
-    } else if (strcmp(spec, "mscl_3830") == 0) {
-        compositor = new AcrylicCompositorMSCL3830(capability_mscl_3830);
     } else if (strcmp(spec, "dummy") == 0) {
         compositor = new AcrylicCompositorDummy(capability_fimg2d_8895);
     } else {

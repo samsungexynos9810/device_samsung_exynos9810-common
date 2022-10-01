@@ -47,8 +47,6 @@ LOCAL_SRC_FILES := \
     acrylic_g2d.cpp \
     acrylic_mscl9810.cpp \
     acrylic_g2d9810.cpp \
-    acrylic_mscl3830.cpp \
-    acrylic_mscl3830_pre.cpp \
     acrylic_factory.cpp acrylic_layer.cpp \
     acrylic_formats.cpp \
     acrylic_performance.cpp \
