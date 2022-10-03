@@ -34,9 +34,7 @@ class G2DHdrWriter {
     g2d_commandlist *mCmds = nullptr;
 public:
     G2DHdrWriter() {
-#ifdef LIBACRYL_G2D9810_HDR_PLUGIN
         mWriter.reset(IG2DHdr10CommandWriter::createInstance());
-#endif
     }
 
     ~G2DHdrWriter() {
