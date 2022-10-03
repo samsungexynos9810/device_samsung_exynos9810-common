@@ -26,11 +26,7 @@
 #include "ExynosResourceRestriction.h"
 #include <hardware/hwcomposer_defs.h>
 #include <math.h>
-#ifdef GRALLOC_VERSION1
-#include "gralloc1_priv.h"
-#else
-#include "gralloc_priv.h"
-#endif
+#include "gralloc3_priv.h"
 #include "ExynosHWCDebug.h"
 #include "ExynosDisplay.h"
 #include "ExynosVirtualDisplay.h"
@@ -974,18 +970,13 @@ uint32_t ExynosMPP::getBufferType(uint64_t usage)
 
 uint32_t ExynosMPP::getBufferType(const private_handle_t *handle)
 {
-#ifdef GRALLOC_VERSION1
     uint64_t usage = handle->producer_usage;
-#else
-    uint64_t usage = handle->flags;
-#endif
     return getBufferType(usage);
 }
 
 uint64_t ExynosMPP::getBufferUsage(uint64_t usage)
 {
     uint64_t allocUsage = 0;
-#ifdef GRALLOC_VERSION1
     if (getBufferType(usage) == MPP_BUFFER_DUMP) {
         allocUsage = GRALLOC1_PRODUCER_USAGE_CPU_READ_OFTEN |
             GRALLOC1_PRODUCER_USAGE_CPU_WRITE_OFTEN;
@@ -1010,32 +1001,6 @@ uint64_t ExynosMPP::getBufferUsage(uint64_t usage)
           !(allocUsage & GRALLOC1_CONSUMER_USAGE_VIDEO_EXT))) {
         allocUsage |= (GRALLOC1_CONSUMER_USAGE_GPU_TEXTURE | GRALLOC1_PRODUCER_USAGE_GPU_RENDER_TARGET);
     }
-#else
-    if (getBufferType(usage) == MPP_BUFFER_DUMP) {
-        allocUsage = GRALLOC_USAGE_SW_READ_OFTEN |
-            GRALLOC_USAGE_SW_WRITE_OFTEN;
-    } else {
-        allocUsage = GRALLOC_USAGE_SW_READ_NEVER |
-            GRALLOC_USAGE_SW_WRITE_NEVER |
-            GRALLOC_USAGE_NOZEROED |
-            GRALLOC_USAGE_HW_COMPOSER;
-    }
-
-    if (getDrmMode(usage) == SECURE_DRM) {
-        allocUsage |= GRALLOC_USAGE_PROTECTED;
-        allocUsage &= ~GRALLOC_USAGE_PRIVATE_NONSECURE;
-    } else if (getDrmMode(usage) == NORMAL_DRM) {
-        allocUsage |= GRALLOC_USAGE_PROTECTED;
-        allocUsage |= GRALLOC_USAGE_PRIVATE_NONSECURE;
-    }
-
-    /* HACK: for distinguishing FIMD_VIDEO_region */
-    if (!((allocUsage & GRALLOC_USAGE_PROTECTED) &&
-          !(allocUsage & GRALLOC_USAGE_PRIVATE_NONSECURE) &&
-          !(allocUsage & GRALLOC_USAGE_VIDEO_EXT))) {
-        allocUsage |= (GRALLOC_USAGE_HW_TEXTURE | GRALLOC_USAGE_HW_RENDER);
-    }
-#endif
 
     return allocUsage;
 }

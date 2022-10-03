@@ -739,11 +739,7 @@ int32_t ExynosLayer::setSrcExynosImage(exynos_image *src_img)
             src_img->format = handle->format;
         else
             src_img->format = mPreprocessedInfo.mPrivateFormat;
-#ifdef GRALLOC_VERSION1
         src_img->usageFlags = handle->producer_usage;
-#else
-        src_img->usageFlags = (uint64_t)handle->flags;
-#endif
         src_img->bufferHandle = handle;
     }
     src_img->x = (int)mPreprocessedInfo.sourceCrop.left;
@@ -788,11 +784,7 @@ int32_t ExynosLayer::setDstExynosImage(exynos_image *dst_img)
     if (handle == NULL) {
         dst_img->usageFlags = 0x0;
     } else {
-#ifdef GRALLOC_VERSION1
         dst_img->usageFlags = handle->producer_usage;
-#else
-        dst_img->usageFlags = (uint64_t)handle->flags;
-#endif
     }
 
     if (mIsDimLayer) {

@@ -21,11 +21,7 @@
 #include "../libdevice/ExynosLayer.h"
 
 #include "ExynosHWCHelper.h"
-#ifdef GRALLOC_VERSION1
-#include "gralloc1_priv.h"
-#else
-#include "gralloc_priv.h"
-#endif
+#include "gralloc3_priv.h"
 
 extern struct exynos_hwc_control exynosHWCControl;
 

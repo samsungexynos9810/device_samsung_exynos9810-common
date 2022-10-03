@@ -23,11 +23,7 @@
 
 #include "ExynosHWC.h"
 #include <hardware/hwcomposer2.h>
-#ifdef GRALLOC_VERSION1
-#include "gralloc1_priv.h"
-#else
-#include "gralloc_priv.h"
-#endif
+#include "gralloc3_priv.h"
 #include "ExynosHWCHelper.h"
 #include "ExynosMPP.h"
 #include "ExynosResourceManager.h"

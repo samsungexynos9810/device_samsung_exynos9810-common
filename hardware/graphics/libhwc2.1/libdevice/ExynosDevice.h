@@ -35,11 +35,7 @@
 #include "ExynosHWCModule.h"
 #include "ExynosHWCHelper.h"
 
-#ifdef GRALLOC_VERSION1
-#include "gralloc1_priv.h"
-#else
-#include "gralloc_priv.h"
-#endif
+#include "gralloc3_priv.h"
 #include "GrallocWrapper.h"
 
 #define MAX_DEV_NAME 128

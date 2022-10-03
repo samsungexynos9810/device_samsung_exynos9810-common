@@ -19,11 +19,7 @@
 #include <utils/String8.h>
 #include <hardware/hwcomposer2.h>
 #include <map>
-#ifdef GRALLOC_VERSION1
-#include "gralloc1_priv.h"
-#else
-#include "gralloc_priv.h"
-#endif
+#include "gralloc3_priv.h"
 #include "DeconCommonHeader.h"
 #include "VendorVideoAPI.h"
 #include "exynos_sync.h"

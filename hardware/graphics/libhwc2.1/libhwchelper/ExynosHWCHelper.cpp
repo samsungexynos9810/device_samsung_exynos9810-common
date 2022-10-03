@@ -77,41 +77,23 @@ uint32_t getHWC1CompType(int32_t type) {
 
 uint32_t getDrmMode(uint64_t flags)
 {
-#ifdef GRALLOC_VERSION1
     if (flags & GRALLOC1_PRODUCER_USAGE_PROTECTED) {
         if (flags & GRALLOC1_PRODUCER_USAGE_PRIVATE_NONSECURE)
             return NORMAL_DRM;
         else
             return SECURE_DRM;
     }
-#else
-    if (flags & GRALLOC_USAGE_PROTECTED) {
-        if (flags & GRALLOC_USAGE_PRIVATE_NONSECURE)
-            return NORMAL_DRM;
-        else
-            return SECURE_DRM;
-    }
-#endif
     return NO_DRM;
 }
 
 uint32_t getDrmMode(const private_handle_t *handle)
 {
-#ifdef GRALLOC_VERSION1
     if (handle->producer_usage & GRALLOC1_PRODUCER_USAGE_PROTECTED) {
         if (handle->producer_usage & GRALLOC1_PRODUCER_USAGE_PRIVATE_NONSECURE)
             return NORMAL_DRM;
         else
             return SECURE_DRM;
     }
-#else
-    if (handle->flags & GRALLOC_USAGE_PROTECTED) {
-        if (handle->flags & GRALLOC_USAGE_PRIVATE_NONSECURE)
-            return NORMAL_DRM;
-        else
-            return SECURE_DRM;
-    }
-#endif
     return NO_DRM;
 }
 

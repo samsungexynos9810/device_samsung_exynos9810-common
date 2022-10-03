@@ -23,11 +23,7 @@
 #include <utils/Timers.h>
 #include <hardware/hwcomposer2.h>
 #include "ExynosHWC.h"
-#ifdef GRALLOC_VERSION1
-#include "gralloc1_priv.h"
-#else
-#include "gralloc_priv.h"
-#endif
+#include "gralloc3_priv.h"
 #include "ExynosDisplay.h"
 #include "VendorVideoAPI.h"
 

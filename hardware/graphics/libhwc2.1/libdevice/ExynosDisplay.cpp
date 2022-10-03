@@ -543,11 +543,7 @@ void ExynosDisplay::doPreProcessing() {
         private_handle_t *handle = mLayers[i]->mLayerBuffer;
         /* TODO: This should be checked **/
         if ((handle != NULL) &&
-#ifdef GRALLOC_VERSION1
             (handle->consumer_usage & GRALLOC1_CONSUMER_USAGE_DAYDREAM_SINGLE_BUFFER_MODE))
-#else
-            (handle->flags & GRALLOC_USAGE_DAYDREAM_SINGLE_BUFFER_MODE))
-#endif
         {
             hasSingleBuffer = true;
         }
@@ -3572,11 +3568,7 @@ int32_t ExynosDisplay::setCompositionTargetExynosImage(uint32_t targetType, exyn
     if (compositionInfo.mTargetBuffer != NULL) {
         src_img->bufferHandle = compositionInfo.mTargetBuffer;
         src_img->format = compositionInfo.mTargetBuffer->format;
-#ifdef GRALLOC_VERSION1
         src_img->usageFlags = compositionInfo.mTargetBuffer->producer_usage;
-#else
-        src_img->usageFlags = compositionInfo.mTargetBuffer->flags;
-#endif
     } else {
         src_img->bufferHandle = NULL;
         src_img->format = HAL_PIXEL_FORMAT_RGBA_8888;
