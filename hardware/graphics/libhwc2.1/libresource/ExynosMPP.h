@@ -518,7 +518,7 @@ public:
 
     GrallocWrapper::Allocator* mAllocator;
     GrallocWrapper::Mapper* mMapper;
-    ResourceManageThread mResourceManageThread;
+    sp<ResourceManageThread> mResourceManageThread;
     float mCapacity;
     float mUsedCapacity;
     float mPreAssignedCapacity;
