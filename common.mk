@@ -56,7 +56,6 @@ PRODUCT_COPY_FILES += \
 
 # Bluetooth
 PRODUCT_PACKAGES += \
-    android.hardware.bluetooth@1.1-impl:64 \
     android.hardware.bluetooth@1.1-service
 
 PRODUCT_COPY_FILES += \
