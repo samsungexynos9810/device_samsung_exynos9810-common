@@ -19,6 +19,9 @@ COMMON_PATH := device/samsung/exynos9810-common
 # Get non-open-source specific aspects
 $(call inherit-product, vendor/samsung/exynos9810-common/exynos9810-common-vendor.mk)
 
+# AOSPA
+include device/samsung/exynos9810-common/common-aospa.mk
+
 DEVICE_PACKAGE_OVERLAYS += \
     $(COMMON_PATH)/overlay
 
